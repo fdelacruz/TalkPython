@@ -15,18 +15,18 @@ def print_header():
 def run_event_loop():
 
     print("What do you want to do with your journal?")
-    cmd = None
+    cmd = 'EMPTY'
     journal_name = 'default'
     journal_data = journal.load(journal_name)
 
-    while cmd != "x":
+    while cmd != "x" and cmd:
         cmd = input("[L]ist entries, [A]dd an entry, E[x]it: ")
 
         if cmd.lower().strip() == "l":
             list_stries(journal_data)
         elif cmd.lower().strip() == "a":
             add_entry(journal_data)
-        elif cmd.lower().strip() != "x":
+        elif cmd.lower().strip() != "x" and cmd:
             print(f"Sorry, we don't understand '{cmd}'.")
 
     print("Good bye!")
