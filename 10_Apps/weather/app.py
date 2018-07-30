@@ -1,4 +1,5 @@
 import requests
+import bs4
 
 
 def main():
@@ -7,6 +8,8 @@ def main():
     code = input('What zipcode do you want the weather for (972101)? ')
 
     html = get_html_from_web(code)
+
+    get_weather_from_html(html)
 
 
 def print_header():
@@ -24,6 +27,11 @@ def get_html_from_web(zipcode):
 
     return response.text
 
+
+def get_weather_from_html(html):
+    soup = bs4.BeautifulSoup(html, 'html.parser')
+    print(soup)
+    
 
 if __name__ == '__main__':
     main()
