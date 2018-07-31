@@ -9,7 +9,8 @@ def main():
 
     html = get_html_from_web(code)
 
-    get_weather_from_html(html)
+    report = get_weather_from_html(html)
+    print(f'The temp in {report[3]} is {report[1]} {report[2]}')
 
 
 def print_header():
@@ -41,7 +42,7 @@ def get_weather_from_html(html):
     temp = cleanup_text(temp)
     scale = cleanup_text(scale)
 
-    print(condition, temp, scale, loc)
+    return condition, temp, scale, loc  #tuple return
 
 
 def find_city_and_state_from_loc(loc):
