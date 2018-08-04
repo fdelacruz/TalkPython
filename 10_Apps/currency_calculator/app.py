@@ -28,7 +28,9 @@ def get_html_from_web(amount):
 
 def get_exchange_from_html(html):
     soup = bs4.BeautifulSoup(html, 'html.parser')
-    print(soup)
+    RPS = soup.find(class_='ccOutputRslt').get_text()
+    USD = soup.find(class_='ccOutputTxt').get_text()
+    print(f'{USD} {RPS}')
 
 
 if __name__ == '__main__':
