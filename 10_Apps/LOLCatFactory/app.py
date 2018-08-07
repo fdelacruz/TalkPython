@@ -1,11 +1,14 @@
 import os
+import cat_service
+
 
 def main():
     print_header()
 
     folder = get_or_create_output_folder()
 
-    # download cats
+    download_cats(folder)
+
     # display cats
 
 
@@ -25,6 +28,13 @@ def get_or_create_output_folder():
         os.mkdir(full_path)
 
     return full_path
+
+
+def download_cats(folder):
+    cat_count = 8
+    for i in range(1, cat_count + 1):
+        name = f'lolcat {i}'
+        cat_service.get_cat(folder, name)
 
 
 if __name__ == "__main__":
