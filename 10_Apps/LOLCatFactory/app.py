@@ -31,10 +31,14 @@ def get_or_create_output_folder():
 
 
 def download_cats(folder):
+    print('Contacting server to download cats..')
     cat_count = 8
     for i in range(1, cat_count + 1):
         name = f'lolcat {i}'
+        print('Downloading cat ' +name)
         cat_service.get_cat(folder, name)
+
+    print('Done.')
 
 
 if __name__ == "__main__":
