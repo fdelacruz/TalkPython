@@ -16,16 +16,14 @@ def print_header():
 def game_loop():
 
     creatures = [
-        Creature(),
-        Creature(),
-        Creature(),
-        Creature(),
-        Creature()
-
+        Creature('Toad', 1),
+        Creature('Tiger', 12),
+        Creature('Bat', 3),
+        Creature('Dragon', 50),
+        Creature('Evil Wizard', 1000)
     ]
 
-    hero = Wizard()
-
+    hero = Wizard('Gandolf', 75)
 
     while True:
 
