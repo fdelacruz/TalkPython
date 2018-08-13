@@ -1,4 +1,6 @@
 from actors import Wizard, Creature
+import random
+import time
 
 
 def main():
@@ -27,13 +29,27 @@ def game_loop():
 
     while True:
 
+        active_creature = random.choice(creatures)
+        print('A {} of level {} has appear from a dark and foggy forest...'.
+                format(active_creature.name, active_creature.level))
+        print()
+
         cmd = input('Do you [a]ttack, [r]un away, [l]ook around: ')
         if cmd == 'a':
-            print('attack')
+            if hero.attack(active_creature):
+                creatures.remove(active_creature)
+            else:
+                print('The Wizard runs and hides taking time to recover...')
+                time.sleep(5)
+                print('The Wizard returns revitalized!')
+
         elif cmd == 'r':
-            print('run away')
+            print('The Wizard has become unsure of his powers and flees!')
         elif cmd == 'l':
-            print('look around')
+            print('The Wizard {} takes in the surrounding and sees:'
+                    .format(hero.name))
+            for c in creatures:
+                print(' * A {} of level {}'.format(c.name, c.level))
         else:
             print('OK, exiting game...bye!!')
             break
