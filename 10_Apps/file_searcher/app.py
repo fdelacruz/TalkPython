@@ -18,13 +18,17 @@ def main():
         return
 
     matches = search_folders(folder, text)
+    match_count = 0
     for m in matches:
+        match_count += 1
         # print(m)
         print('------------- MATCH ---------------')
         print('file: ' + m.file)
         print('line: {}'.format(m.line))
         print('match: ' + m.text.strip())
         print()
+
+    print('Found {:,} matches.'.format(match_count))
 
 
 def print_header():
