@@ -56,24 +56,34 @@ def get_search_text_from_user():
 
 
 def search_folders(folder, text):
-
-    all_matches = []
+    # all_matches = []
     items = os.listdir(folder)
 
     for item in items:
         full_item = os.path.join(folder, item)
         if os.path.isdir(full_item):
             matches = search_folders(full_item, text)
-            all_matches.extend(matches)
+            # all_matches.extend(matches)
+
+            # for m in matches:
+            #     yield m       # generator
+
+            yield from matches  # even better keyword as of python 3.3
+
         else:
             matches = search_file(full_item, text)
-            all_matches.extend(matches)
+            # all_matches.extend(matches)
 
-    return all_matches
+            # for m in matches:
+            #     yield m
+
+            yield from matches
+
+    # return all_matches
 
 
 def search_file(filename, search_text):
-    matches = []
+    # matches = []
     with open(filename, 'r', encoding='ISO-8859-1') as fin:
 
         line_num = 0
@@ -81,9 +91,10 @@ def search_file(filename, search_text):
             line_num += 1
             if line.lower().find(search_text) >= 0:
                 m = SearchResults(line=line_num, file=filename, text=line)
-                matches.append(m)
+                # matches.append(m)
+                yield m
 
-        return matches
+        # return matches
 
 
 if __name__ == "__main__":
