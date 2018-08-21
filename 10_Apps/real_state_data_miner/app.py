@@ -1,6 +1,11 @@
 import os
 import csv
-import statistics
+
+try:
+    import statistics
+except:
+    # error code instead
+    import statistics_standing_for_py2 as statistics
 
 from data_types import Purchase
 
@@ -27,6 +32,7 @@ def get_data_file():
 
 def load_file(filename):
     with open(filename, 'r', encoding='utf-8') as fin:
+    # with open(filename, 'r') as fin:
 
         reader = csv.DictReader(fin)
         purchases = []
