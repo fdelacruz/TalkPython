@@ -23,6 +23,7 @@ def get_data_file():
     return os.path.join(base_folder, 'data',
                         'SacramentoRealEstateTransactions2008.csv')
 
+
 def load_file(filename):
     with open(filename, 'r', encoding='utf-8') as fin:
 
@@ -57,6 +58,20 @@ def load_file(filename):
 
 
 def query_data(data):
+    # if data was sorted by price:
+    data.sort(key=lambda p: p.price)
+
+    # most expensive house?
+    high_purchase = data[-1]
+    print('The most expensive house is ${:,} with {} beds and {} baths'
+          .format(high_purchase.price, high_purchase.beds, high_purchase.baths))
+
+    # lease expensive house?
+    low_purchase = data[0]
+    print('The least expensive house is ${:,} with {} beds and {} baths'
+          .format(low_purchase.price, low_purchase.beds, low_purchase.baths))
+    # average price house?
+    # average price of 2 bedroom houses
     pass
 
 
