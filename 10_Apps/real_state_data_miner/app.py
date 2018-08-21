@@ -1,5 +1,6 @@
 import os
 import csv
+import statistics
 
 from data_types import Purchase
 
@@ -64,15 +65,29 @@ def query_data(data):
     # most expensive house?
     high_purchase = data[-1]
     print('The most expensive house is ${:,} with {} beds and {} baths'
-          .format(high_purchase.price, high_purchase.beds, high_purchase.baths))
+          .format(high_purchase.price, high_purchase.beds,
+                  high_purchase.baths))
 
     # lease expensive house?
     low_purchase = data[0]
     print('The least expensive house is ${:,} with {} beds and {} baths'
           .format(low_purchase.price, low_purchase.beds, low_purchase.baths))
     # average price house?
-    # average price of 2 bedroom houses
-    pass
+    prices = []
+    for purchases in data:
+        prices.append(purchases.price)
+
+    avg_price = statistics.mean(prices)
+    print('The average home price is ${:,}'.format(int(avg_price)))
+
+    # average price of 2-bedroom houses
+    prices = []
+    for purchases in data:
+        if purchases.beds == 2:
+            prices.append(purchases.price)
+
+    avg_price = statistics.mean(prices)
+    print('The average price of a 2-bedroom is ${:,}'.format(int(avg_price)))
 
 
 if __name__ == "__main__":
