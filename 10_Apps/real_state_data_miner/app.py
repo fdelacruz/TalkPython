@@ -98,13 +98,23 @@ def query_data(data):
     #     if purchases.beds == 2:
     #         prices.append(purchases.price)
 
-    two_bed_homes = [p for p in data if p.beds == 2]
+    two_bed_homes = [
+        p
+        for p in data
+        if announce(p, '2-bedrooms, found {}'.format(p.beds)) and p.beds == 2
+    ]
 
-    avg_price = statistics.mean([p.price for p in two_bed_homes])
-    avg_baths = statistics.mean([p.baths for p in two_bed_homes])
-    avg_sqft = statistics.mean([p.sq__ft for p in two_bed_homes])
-    print('The average 2-bedroom home is ${:,}, baths={}, sq ft={}'
+    avg_price = statistics.mean([announce(p.price, 'price') for p in
+                                two_bed_homes[:5]])
+    avg_baths = statistics.mean([p.baths for p in two_bed_homes[:5]])
+    avg_sqft = statistics.mean([p.sq__ft for p in two_bed_homes[:5]])
+    print('The average 2-bedroom home is ${:,}, baths={}, sq ft={:,}'
           .format(int(avg_price), round(avg_baths, 1), round(avg_sqft, 1)))
+
+
+def announce(item, msg):
+    print('Pulling item {} for {}'.format(item, msg))
+    return item
 
 
 if __name__ == "__main__":
