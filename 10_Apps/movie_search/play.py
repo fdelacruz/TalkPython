@@ -15,20 +15,29 @@ movie_data = resp.json()
 # print(type(movie_data), movie_data) # dict
 movie_list = movie_data.get('hits')   # list of movies
 
-movies = []
-for md in movie_list:
-    m = MovieResult(
-            imdb_code=md.get('imdb_code'),
-            title=md.get('title'),
-            duration=md.get('duration'),
-            director=md.get('director'),
-            year=md.get('year'),
-            rating=md.get('rating'),
-            imdb_score=md.get('imdb_score'),
-            keywords=md.get('keywords'),
-            genres=md.get('genres')
-    )
-    movies.append(m)
+# movies = []
+# for md in movie_list:
+# m = MovieResult(
+#         imdb_code=md.get('imdb_code'),
+#         title=md.get('title'),
+#         duration=md.get('duration'),
+#         director=md.get('director'),
+#         year=md.get('year'),
+#         rating=md.get('rating'),
+#         imdb_score=md.get('imdb_score'),
+#         keywords=md.get('keywords'),
+#         genres=md.get('genres')
+# )
+
+# movies = []
+# for md in movie_list:
+#     m = MovieResult(**md)  # using key/word argusments (**kwargs)
+#     movies.append(m)
+
+movies = [
+    MovieResult(**md)        # using a list comprehension
+    for md in movie_list
+]
 
 print('Found {} movies for search \'{}\''.format(len(movies), search))
 for m in movies:
